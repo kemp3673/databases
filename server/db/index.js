@@ -9,4 +9,20 @@ var mysql = require('mysql2');
 // OR
 // user: 'root', password: 'some_password_you_created_at_install'
 
+var conn = mysql.createConnection({
+  database: 'chat',
+  username: 'root',
+  password: '',
+  host: 'localhost'
+});
+
+conn.connect();
+
+conn.query('SELECT * FROM messages', function(err, data) {
+  if (err) {
+    callback(new Error('CONNECTED FAILED'));
+  } else {
+    callback(null, data);
+  }
+});
 
