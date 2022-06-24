@@ -19,11 +19,16 @@ app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
 
-// Set up our routes
-app.use('/classes', router);
-
 // Serve the client files
 app.use(express.static(__dirname + '/../client'));
+
+// Set up our routes
+app.use('/classes', router);
+//app.use('/classes', router);
+//app.use('/classes/messages', router);
+//app.use('/classes/user', router);
+
+
 
 // If we are being run directly, run the server.
 if (!module.parent) {

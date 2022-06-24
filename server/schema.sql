@@ -7,20 +7,28 @@ CREATE TABLE
   users(
     userID int NOT NULL,
     username varchar(255) NOT NULL,
-    memberDate int NOT NULL,
     PRIMARY KEY (userID)
 );
 
-CREATE TABLE messages (
-  message_id int NOT NULL AUTO_INCREMENT,
-  text varchar(255) NOT NULL,
-  userID int NOT NULL,
-  PRIMARY KEY (message_id),
-  FOREIGN KEY (userID) REFERENCES users(userID)
+
+CREATE TABLE
+  rooms(
+    roomID int NOT NULL,
+    roomname varchar(255) NOT NULL,
+    PRIMARY KEY (roomID)
 );
 
 
-
+CREATE TABLE
+  messages(
+    message_id int NOT NULL AUTO_INCREMENT,
+    text varchar(255) NOT NULL,
+    userID int NOT NULL,
+    roomID int NOT NULL,
+    PRIMARY KEY (message_id),
+    FOREIGN KEY (userID) REFERENCES users(userID),
+    FOREIGN KEY (roomID) REFERENCES rooms(roomID)
+);
 
 /* Create other tables and define schemas for them here! */
 
@@ -34,5 +42,6 @@ CREATE TABLE messages (
 
 SHOW TABLES;
 
-DESCRIBE messages;
 DESCRIBE users;
+DESCRIBE rooms;
+DESCRIBE messages;
