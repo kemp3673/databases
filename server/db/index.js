@@ -9,4 +9,22 @@ var mysql = require('mysql2');
 // OR
 // user: 'root', password: 'some_password_you_created_at_install'
 
+var conn = mysql.createConnection({
+  database: 'chat',
+  user: 'root',
+  password: '',
+  host: 'localhost'
+});
 
+conn.connect();
+
+
+conn.query('SELECT message_id, text, username, roomname FROM messages INNER JOIN users ON messages.userID = users.userID INNER JOIN rooms ON messages.roomID = rooms.roomID;', function(err, data) {
+  if (err) {
+    throw err;
+  } else {
+    return Object.values(JSON.parse(JSON.stringify(data)));
+  }
+});
+
+module.exports = conn;
