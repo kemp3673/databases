@@ -19,12 +19,12 @@ var conn = mysql.createConnection({
 conn.connect();
 
 
-conn.query('SELECT text, username, roomname FROM messages INNER JOIN users ON messages.userID = users.userID INNER JOIN rooms ON messages.roomID = rooms.roomID;', function(err, data) {
+conn.query('SELECT message_id, text, username, roomname FROM messages INNER JOIN users ON messages.userID = users.userID INNER JOIN rooms ON messages.roomID = rooms.roomID;', function(err, data) {
   if (err) {
     throw err;
   } else {
-    console.log('\x1b[32m\x1b[1m', 'DATA: ', JSON.parse(JSON.stringify(data)));
     return Object.values(JSON.parse(JSON.stringify(data)));
   }
 });
 
+module.exports = conn;

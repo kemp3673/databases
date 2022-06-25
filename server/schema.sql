@@ -5,7 +5,7 @@ USE chat;
 
 CREATE TABLE
   users(
-    userID int NOT NULL,
+    userID int AUTO_INCREMENT,
     username varchar(255) NOT NULL,
     PRIMARY KEY (userID)
 );
@@ -13,7 +13,7 @@ CREATE TABLE
 
 CREATE TABLE
   rooms(
-    roomID int NOT NULL,
+    roomID int AUTO_INCREMENT,
     roomname varchar(255) NOT NULL,
     PRIMARY KEY (roomID)
 );
@@ -21,7 +21,7 @@ CREATE TABLE
 
 CREATE TABLE
   messages(
-    message_id int NOT NULL AUTO_INCREMENT,
+    message_id int AUTO_INCREMENT,
     text varchar(255) NOT NULL,
     userID int NOT NULL,
     roomID int NOT NULL,

@@ -8,7 +8,7 @@ const API_URL = 'http://127.0.0.1:3000/classes';
 
 describe('Persistent Node Chat Server', () => {
   const dbConnection = mysql.createConnection({
-    user: 'user',
+    user: 'root',
     password: '',
     database: 'chat',
   });
@@ -29,9 +29,14 @@ describe('Persistent Node Chat Server', () => {
   });
 
   it('Should insert posted messages to the DB', (done) => {
-    const username = 'Valjean';
+    const username = 'billybob';
     const message = 'In mercy\'s name, three days is all I need.';
-    const roomname = 'Hello';
+    const roomname = 'champaign';
+
+    // const username = 'Valjean';
+    // const message = 'In mercy\'s name, three days is all I need.';
+    // const roomname = 'Hello';
+
     // Create a user on the chat server database.
     axios.post(`${API_URL}/users`, { username })
       .then(() => {
@@ -44,7 +49,7 @@ describe('Persistent Node Chat Server', () => {
         /* TODO: You might have to change this test to get all the data from
          * your message table, since this is schema-dependent. */
         const queryString = 'SELECT * FROM messages';
-        const queryArgs = [];
+        const queryArgs = ['text', 'roomID', 'userID'];
 
         dbConnection.query(queryString, queryArgs, (err, results) => {
           if (err) {
@@ -65,8 +70,8 @@ describe('Persistent Node Chat Server', () => {
 
   it('Should output all messages from the DB', (done) => {
     // Let's insert a message into the db
-    const queryString = '';
-    const queryArgs = [];
+    const queryString = 'TEST';
+    const queryArgs = ['text', 'roomID', 'userID'];
     /* TODO: The exact query string and query args to use here
      * depend on the schema you design, so I'll leave them up to you. */
     dbConnection.query(queryString, queryArgs, (err) => {
